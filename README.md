@@ -38,5 +38,15 @@ sudo apt-get install terraform
 
 > Use Terraform website to fetch latest instruction for installing Terraform.
 
+### [Make script Executable](https://www.geeksforgeeks.org/chmod-command-linux/)
+
+Now to make this script executable I need to add permissions.
+CHMOD is the command to make bash file executable in linux.
+
+``` bash
+chmod +x ./bin/terradorm-cli 
+```
+
+After making the script executable add it to .yml file for auto installation.
 
 
