@@ -110,3 +110,9 @@ source ./bin/aws-cli
     "Arn": "arn:aws:iam::12345678912:user/temp-user-terraform"
 }
 ```
+
+### RUN [AWS-CLI](/bin/aws-cli) in [install-script.sh](/install-script.sh)
+
+[install-script.sh](/install-script.sh) is not working right now!!!!
+
+
