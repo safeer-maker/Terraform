@@ -1,10 +1,10 @@
 #bin/bash
 
 # Install the required packages
-source ./bin/terradorm-cli
+./bin/terradorm-cli
 
 # Install AWS CLI
-source ./bin/aws-cli
+./bin/aws-cli
 
 # Check if the environment-var file exists
 # if [ -f "./bin/environment-var" ]; then

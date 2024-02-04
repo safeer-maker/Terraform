@@ -115,4 +115,15 @@ source ./bin/aws-cli
 
 [install-script.sh](/install-script.sh) is not working right now!!!!
 
+**WELL IT WORKED**
+
+The [aws-cli](/bin/aws-cli) and [terraform-cli](/bin/terradorm-cli) needs higher permission to run. You can grant those permission using chmod. use below commands to give these permission
+
+```bash
+chmod 774 /bin/aws-cli
+chmod 774 /bin/erradorm-cli
+```
+
+> After permission the [install-scrip.sh](/install-script.sh) worked fine.
+
 
