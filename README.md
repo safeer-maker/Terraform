@@ -94,4 +94,19 @@ source ./env.sh
 
 [aws-cli](/bin/aws-cli) bash script is created to install the AWS CLI. [Reference link to install aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
-The work flow I have used for bash script requires to add [AWS ENVARS](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html) first in env.sh script. Sample AWS variables are in [.env.example](/env.example)
+The work flow I have used for bash script requires to add [AWS ENVARS](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html) first in env.sh script. Sample AWS variables are in [.env.example](env.example)
+
+> Once you set the variables. Run the [aws-cli](/bin/aws-cli) to setup AWS CLI
+
+```bash
+source ./bin/aws-cli
+```
+
+> **OUTPUT must results**
+```bash
+{
+    "UserId": "AIFFSSUHC*******",
+    "Account": "12345678912",
+    "Arn": "arn:aws:iam::12345678912:user/temp-user-terraform"
+}
+```

@@ -1,2 +1,23 @@
 #bin/bash
 
+if [ -z "$AWS_ACCESS_KEY_ID" ]; then
+    echo "AWS_ACCESS_KEY_ID is not set."
+else
+    echo "AWS_ACCESS_KEY_ID is set to: $AWS_ACCESS_KEY_ID"
+
+    cd ..
+    mkdir temp
+    cd temp
+
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    unzip awscliv2.zip
+    sudo ./aws/install --update
+
+    cd ..
+    rm -rf temp
+    cd terraform
+
+    aws --version
+    aws sts get-caller-identity
+
+fi
