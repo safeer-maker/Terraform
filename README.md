@@ -58,3 +58,29 @@ The cause was Gitpod's task workflow failing to install the dependencies. Please
 I have to change the **init:** tasks to **before:** tasks. This recommendation will install Terraform dependencies with every restart.
 
 
+## Lets work with environment variable.
+
+In previous work I have learned that Enviranmnet variable (envar) cause lots of issue. 
+
+> Sample envar variable are listed in .env.exapmle. Fetch those variables from required sources and add to /bin/environment-var
+
+Lets create a bin file to export the envar in the program.
+
+As we are using Linux Ubuntu Distro for over project. The envar can be set in terminal as
+
+```bash
+export ENVIRONMENT_VARIABLE = "sample-key"
+```
+> This method can set only termianl and sub terminal level envar variable.
+
+[To select the envar at all bash terminals you can follow this link.](https://www.hostinger.com/tutorials/linux-environment-variables?ppc_campaign=google_search_generic_hosting_all&bidkw=defaultkeyword&lo=9076951&gad_source=1&gclid=EAIaIQobChMI7tO4kviPhAMVrWZBAh0QsQyyEAAYASAAEgKDdfD_BwE)
+
+### Initial setup of Dependensies and Environment Variable
+
+Visual studio code does not setup the envar on it own. If you want to setup you envar and dependonsies you have to edit Preferences in JSON to do it. but this method does not work on multiple development setups. So it better to create an ***install-script.sh*** to load all envar and install depondensies on host system.
+
+```bash
+# Run command to install dependensies
+sudo ./install-script.sh
+```
+
