@@ -89,3 +89,9 @@ sudo ./install-script.sh
 ```bash
 source ./env.sh
 ```
+
+## AWS CLI
+
+[aws-cli](/bin/aws-cli) bash script is created to install the AWS CLI. [Reference link to install aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
+The work flow I have used for bash script requires to add [AWS ENVARS](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html) first in env.sh script. Sample AWS variables are in [.env.example](/env.example)
