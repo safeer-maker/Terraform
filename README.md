@@ -81,10 +81,6 @@ Visual studio code does not setup the envar on it own. If you want to setup you 
 
 ```bash
 # Run command to install dependensies
-# Temporary environment variable
 sudo ./install-script.sh
 ```
-***This scrt is not loading envars. So they must be load on the sell independentaly***
-```bash
-source ./bin/environment-var
-```
+

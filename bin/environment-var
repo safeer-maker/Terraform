@@ -1,0 +1,4 @@
+#bin/bash
+
+# Temporary environment variable
+export MY_VAR="Hello World"

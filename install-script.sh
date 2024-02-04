@@ -3,7 +3,6 @@
 # Install the required packages
 ./bin/terradorm-cli
 
-# Variables must be load in script directely
 # loading the environment variables
 # ./bin/environment-var
 
