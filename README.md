@@ -84,3 +84,8 @@ Visual studio code does not setup the envar on it own. If you want to setup you 
 sudo ./install-script.sh
 ```
 
+> Install-script.sh is not able to export envars. So I created a seperate bash script. env.sh will load all the envars but needed to be called seperately on the terminal 
+
+```bash
+source ./env.sh
+```
