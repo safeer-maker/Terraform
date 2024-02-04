@@ -32,3 +32,8 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+# Igonre environment-var files as they are private varaibles
+/bin/env-vars.sh
+```
+
