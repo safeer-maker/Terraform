@@ -22,7 +22,7 @@ Terraform plan create a chainset about the state of infrastructure we are willin
 ### Terraform apply:
 Terraform apply will generate the plan and then apply that plan to create resources.
 
-> `terraform apply` its alsways ask to write yes to run the task. To automate it pass the flag `--auto-approve'
+> `terraform apply` its alsways ask to write yes to run the task. To automate it pass the flag `--auto-approve`
 
 ```bash 
 # terraform command to apply
@@ -40,7 +40,44 @@ Prompt the output of the resource created by terraform
 terraform output random_bucket_name
 ```
 
+### Terraform Destroy;
+To destroy all the resources Terraform has created either locally or on Cloud Providers
 
+```bash
+terraform destroy
+```
+
+> Can use flag `--auto-approve`
+
+## S3 Bucket
+
+We can create an s3 bucket using AWS provider in .tf file.
+
+[AWS S3 bucket doc link](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket)
+
+Use random_string bucket_name to create bucket name as S3 required unique name at global level.
+
+If you have configure your AWS CLI at global level that it can run from any shell. Else we can explecitely pass the configuration keys to use with in terraform module.
+
+```bash
+provider "aws" {
+  region     = "us-west-2"
+  access_key = "my-access-key"
+  secret_key = "my-secret-key"
+}
+```
+
+But ***NOT*** to pass them in the form of global envars as terraform will detect them automatically.
+
+```bash
+provider "aws" {
+  # Configuration options
+    region     = "$AWS_DEFAULT_REGION"
+    access_key = "$AWS_ACCESS_KEY_ID"
+    secret_key = "$AWS_SECRET_ACCESS_KEY"
+}
+```
+> Terraform first use aws config in .tf to congigure aws. If not found then use envars to configure them.
 
 
 
