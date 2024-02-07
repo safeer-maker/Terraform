@@ -1,15 +1,23 @@
 terraform {
-    required_providers {
-        random = {
-        source = "hashicorp/random"
-        version = "3.6.0"
-        }
 
-        aws = {
-        source = "hashicorp/aws"
-        version = "5.35.0"
-        }
-    }
+  cloud {
+      organization = "safeerahmad"
+      workspaces {
+        name = "safeer-tf"
+      }
+  }
+
+  required_providers {
+      random = {
+      source = "hashicorp/random"
+      version = "3.6.0"
+      }
+
+      aws = {
+      source = "hashicorp/aws"
+      version = "5.35.0"
+      }
+  }
 }
 
 provider "random" {

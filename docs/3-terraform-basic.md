@@ -79,6 +79,55 @@ provider "aws" {
 ```
 > Terraform first use aws config in .tf to congigure aws. If not found then use envars to configure them.
 
+## Terraform Cloud
 
+To deploy your inferacture state on to the clould create a project folowed be worksapce and add example code to your .tf file.
 
+when you login into Terraform via cli command `terraform login`. The token is stored in the plain text at `/home/$USER/.terraform.d/credentials.tfrc.json`
 
+The Terraform login commands sucks. You can also store this file using usign ChatGPT on same area mentioned above.
+
+More over the structuer of the *.tfrc.json is
+```json
+{
+  "credentials": {
+    "app.terraform.io": {
+      "token": "YOUR TERRAFORM TOKEN"
+    }
+  }
+}
+```
+
+***Terraform plain not able to create bucket***
+
+Error
+``` bash
+Preparing the remote plan...
+
+To view this run in a browser, visit:
+https://app.terraform.io/app/safeerahmad/safeer-tf/runs/run-FCv9vnYL7DGekMxR
+
+Waiting for the plan to start...
+
+Terraform v1.7.2
+on linux_amd64
+Initializing plugins and modules...
+╷
+│ Error: No valid credential sources found
+│ 
+│   with provider["registry.terraform.io/hashicorp/aws"],
+│   on main.tf line 27, in provider "aws":
+│   27: provider "aws" {
+│ 
+│ Please see https://registry.terraform.io/providers/hashicorp/aws
+│ for more information about providing credentials.
+│ 
+│ Error: failed to refresh cached credentials, no EC2 IMDS role found,
+│ operation error ec2imds: GetMetadata, request canceled, context deadline
+│ exceeded
+│ 
+╵
+Operation failed: failed running terraform plan (exit 1)
+```
+
+I am able to get-caller-identity and also sucessfull in creating s3 bucket using cli command `aws s3api create-bucket --bucket safeer-cli-aws-bucket-143  --region us-east-1`
