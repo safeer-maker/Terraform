@@ -131,3 +131,25 @@ Operation failed: failed running terraform plan (exit 1)
 ```
 
 I am able to get-caller-identity and also sucessfull in creating s3 bucket using cli command `aws s3api create-bucket --bucket safeer-cli-aws-bucket-143  --region us-east-1`
+
+#### Alies of tf for terraform
+
+Writing terraform on every command is a hectic way to do it. Lets make an **Alies** of `terraform` to `tf`
+
+If you does not have `~/.bash_aliases` file then create one. If exist then add below code in it.
+
+```bash
+alias tf="terraform"
+```
+
+After modefing this file add below command in `~/.bashrc` file
+
+```bash
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+```
+Then run `source ~/.bashrc` to implement then alias.
+
+
+
