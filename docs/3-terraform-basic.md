@@ -132,6 +132,13 @@ Operation failed: failed running terraform plan (exit 1)
 
 I am able to get-caller-identity and also sucessfull in creating s3 bucket using cli command `aws s3api create-bucket --bucket safeer-cli-aws-bucket-143  --region us-east-1`
 
+** Lets Try somting **
+
+https://developer.hashicorp.com/terraform/language/settings/backends/remote
+
+Not Resolved
+
+
 #### Alies of tf for terraform
 
 Writing terraform on every command is a hectic way to do it. Lets make an **Alies** of `terraform` to `tf`

@@ -1,11 +1,19 @@
 terraform {
 
-  cloud {
-      organization = "safeerahmad"
-      workspaces {
-        name = "safeer-tf"
-      }
-  }
+  # cloud {
+  #     organization = "safeerahmad"
+  #     workspaces {
+  #       name = "safeer-tf"
+  #     }
+  # }
+  # backend "remote" {
+  #   hostname = "app.terraform.io"
+  #   organization = "safeerahmad"
+
+  #   workspaces {
+  #     name =  "safeer-tf"
+  #   }
+  # }
 
   required_providers {
       random = {
@@ -26,8 +34,11 @@ provider "random" {
 
 provider "aws" {
   # Configuration options
+  # region     = "us-east-1"
+  # access_key = "dgbzJNukLKt9UQrRsqDxZrQojWnTf4AU9Lz5mdgd"
+  # secret_key = "AKIAUHMCCXJ6V3QJZQHQ"
 }
-
+ 
 resource "random_string" "bucket_name" {
   length  = 32
   special = false
