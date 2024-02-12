@@ -35,8 +35,8 @@ provider "random" {
 provider "aws" {
   # Configuration options
   # region     = "us-east-1"
-  # access_key = "dgbzJNukLKt9UQrRsqDxZrQojWnTf4AU9Lz5mdgd"
-  # secret_key = "AKIAUHMCCXJ6V3QJZQHQ"
+  # access_key = "dgbzJNuk*******************U9Lz5mdgd"
+  # secret_key = "AK************QHQ"
 }
  
 resource "random_string" "bucket_name" {
