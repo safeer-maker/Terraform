@@ -34,3 +34,10 @@ override.tf.json
 terraform.rc
 
 env.sh
+
+/temp/*
+
+/node_modules/*
+
+package-lock.json
+package.json

@@ -159,4 +159,29 @@ fi
 Then run `source ~/.bashrc` to implement then alias.
 
 
+## S3 bucket
+
+Create sn s3 bucket with aws console or 
+
+aws s3 md s3//<BUCKET NAME>
+
+Enable s3 bucket "Static website hosting" 
+
+Make a temporary web site using chatgpt and put it in `index.html` file. Then upload that file to s3.
+
+This make a static website but done make s3 bucket **public**
+
+> html web side can run uisng `html-server` if installed on your system.
+
+Upload `index.html` to s3 via s3 console or using aws s3 cli.
+
+``` bash
+aws s3 cp filename.txt s3://bucket-name
+
+#example command 
+ aws s3 cp temp/index.html  s3://safeer-cli-aws-bucket-143
+ ```
+ > the bucket is for temp usage and not public becasue of security purposes.
+ 
+
 
