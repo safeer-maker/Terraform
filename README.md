@@ -29,3 +29,6 @@
 ### Automated Dependency Installation
 
 - Utilize "install-script.sh" to automate dependency installation.
+
+## [3-Terraform-Tasic](/docs/3-terraform-basic.md)
+
