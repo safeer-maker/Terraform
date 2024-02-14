@@ -1,19 +1,11 @@
 terraform {
 
-  # cloud {
-  #     organization = "safeerahmad"
-  #     workspaces {
-  #       name = "safeer-tf"
-  #     }
-  # }
-  # backend "remote" {
-  #   hostname = "app.terraform.io"
-  #   organization = "safeerahmad"
-
-  #   workspaces {
-  #     name =  "safeer-tf"
-  #   }
-  # }
+  cloud {
+      organization = "safeerahmad"
+      workspaces {
+        name = "safeer-tf"
+      }
+  }
 
   required_providers {
       random = {
@@ -23,7 +15,7 @@ terraform {
 
       aws = {
       source = "hashicorp/aws"
-      version = "5.35.0"
+      version = "5.36.0"
       }
   }
 }
@@ -34,9 +26,6 @@ provider "random" {
 
 provider "aws" {
   # Configuration options
-  # region     = "us-east-1"
-  # access_key = "dgbzJNuk*******************U9Lz5mdgd"
-  # secret_key = "AK************QHQ"
 }
  
 resource "random_string" "bucket_name" {

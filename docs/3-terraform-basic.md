@@ -98,9 +98,54 @@ More over the structuer of the *.tfrc.json is
 }
 ```
 
-***Terraform plain not able to create bucket***
+> Its best if you have a copy of this json file at `/root/.terraform.d/credentials.tfrc.json` as well.
 
-Error
+### Resolved tf Cloud Module Issue
+
+When I created the project and workspace in terraform cloud. I get `cloud` module to intigrade into terraform block.
+
+``` json 
+terraform {
+
+  cloud {
+      organization = "safeerahmad"
+      workspaces {
+        name = "safeer-tf"
+      }
+  }
+}
+```
+ [This integration may produce issue.](#terraform-not-able-to-create-resource)
+
+To resolve this its best to set the variables in workspace on terraform cloud website.
+![](/assets/var-app.terraform.io.png)
+
+Add AWS keys as `Environment variable` be clicking `Add variables`
+![](/assets/var2-app.terraform.io.png)
+> Keep these variables private for security purposes. Make sure to select `Environment variable` each time when adding variables.
+
+## Alies of tf for terraform
+
+Writing terraform on every command is a hectic way to do it. Lets make an **Alies** of `terraform` to `tf`
+
+If you does not have `~/.bash_aliases` file then create one. If exist then add below code in it.
+
+```bash
+alias tf="terraform"
+```
+
+After modefing this file add below command in `~/.bashrc` file
+
+```bash
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+```
+Then run `source ~/.bashrc` to implement then alias.
+
+#### Terraform Not able to create resource
+
+when running `tf plan` or `tf apply`/ Terraform was not able to complete plan and promt error. 
 ``` bash
 Preparing the remote plan...
 
@@ -134,29 +179,5 @@ I am able to get-caller-identity and also sucessfull in creating s3 bucket using
 
 ** Lets Try somting **
 
-https://developer.hashicorp.com/terraform/language/settings/backends/remote
-
-Not Resolved
-
-
-#### Alies of tf for terraform
-
-Writing terraform on every command is a hectic way to do it. Lets make an **Alies** of `terraform` to `tf`
-
-If you does not have `~/.bash_aliases` file then create one. If exist then add below code in it.
-
-```bash
-alias tf="terraform"
-```
-
-After modefing this file add below command in `~/.bashrc` file
-
-```bash
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-```
-Then run `source ~/.bashrc` to implement then alias.
-
-
+> [Resolved issue In above heading](#resolved-tf-cloud-module-issue)
 
