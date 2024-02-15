@@ -1,11 +1,11 @@
 terraform {
 
-  cloud {
-      organization = "safeerahmad"
-      workspaces {
-        name = "safeer-tf"
-      }
-  }
+  # cloud {
+  #     organization = "safeerahmad"
+  #     workspaces {
+  #       name = "safeer-tf"
+  #     }
+  # }
 
   required_providers {
       random = {
