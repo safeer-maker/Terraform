@@ -1,3 +1,16 @@
+# Table of contents
+
+- [1-Aws-Cli-and-Terraform-Install](#1-aws-cli-and-terraform-install)
+  * [Install Terraform CLI](#-install-terraform-cli--https---developerhashicorpcom-terraform-tutorials-aws-get-started-install-cli-)
+    + [Check linux version](#-check-linux-version--https---wwwcybercitibiz-faq-how-to-check-os-version-in-linux-command-line--)
+    + [Creating Bash script and running commands](#-creating-bash-script-and-running-commands--https---developerhashicorpcom-terraform-tutorials-aws-get-started-install-cli-)
+    + [Make script Executable](#-make-script-executable--https---wwwgeeksforgeeksorg-chmod-command-linux--)
+    + [Install dependencies on very Gitpod Restart](#-install-dependencies-on-very-gitpod-restart--https---wwwgitpodio-docs-configure-workspaces-tasks-)
+  * [Lets work with environment variable.](#initial-setup-of-dependensies-and-environment-variable)
+  * [AWS CLI](#aws-cli)
+    + [RUN AWS-CLI in install-script.sh](#run--aws-cli---bin-aws-cli--in--install-scriptsh---install-scriptsh-)
+
+
 # 1-Aws-Cli-and-Terraform-Install
 
 ## [Install Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
