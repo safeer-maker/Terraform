@@ -29,3 +29,30 @@ tf apply -var="VARIABLE_NAME=VARIABLE_VALUE"
 
 To store the values in the file, Its best to store in `terraform.tfvars`. This store the value for auto reload in in *plan* and *apply* phases. [Link](https://developer.hashicorp.com/terraform/language/values/variables)
 
+## Sub module
+
+The structure of sub module is most like the root module it self. [link](https://developer.hashicorp.com/terraform/language/modules/develop/structure)
+
+```bash
+├── README.md
+├── main.tf
+├── variables.tf
+├── outputs.tf
+├── ...
+├── modules/
+│   ├── nestedA/
+│   │   ├── README.md
+│   │   ├── variables.tf
+│   │   ├── main.tf
+│   │   ├── outputs.tf
+│   ├── nestedB/
+│   ├── .../
+├── examples/
+│   ├── exampleA/
+│   │   ├── main.tf
+│   ├── exampleB/
+│   ├── .../
+```
+
+
+
