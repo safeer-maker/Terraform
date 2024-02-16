@@ -54,5 +54,6 @@ The structure of sub module is most like the root module it self. [link](https:/
 │   ├── .../
 ```
 
+Root module can call multiple sub modules. The source of sub module can be local system or online storage. Check [Module Sources](https://developer.hashicorp.com/terraform/language/modules/sources#local-paths) to get more detials on that.
 
-
+[Created a sub module of S3 bucket.](/modules/web_bucket/)
