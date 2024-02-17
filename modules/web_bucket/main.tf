@@ -7,10 +7,6 @@ terraform {
   }
 }
 
-# provider "aws" {
-#   # Configuration options
-# }
-
 resource "aws_s3_bucket" "web_bucket" {
   bucket = var.web_bucket_name
 
@@ -19,3 +15,15 @@ resource "aws_s3_bucket" "web_bucket" {
     Environment = var.environment
   }
 } 
+
+resource "aws_s3_bucket_website_configuration" "s3_static_website" {
+  bucket = var.web_bucket_name
+
+  index_document {
+    suffix = "index.html"
+  }
+
+  error_document {
+    key = "error.html"
+  }
+}
