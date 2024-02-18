@@ -27,3 +27,11 @@ resource "aws_s3_bucket_website_configuration" "s3_static_website" {
     key = "error.html"
   }
 }
+
+resource "aws_s3_object" "s3_upload_index" {
+  bucket = var.web_bucket_name
+  key    = "index.html"
+  source = "temp/index.html"
+  content_type = "text/html"
+  etag = filemd5("temp/index.html")
+}

@@ -100,6 +100,30 @@ resource "aws_s3_bucket_website_configuration" "s3_static_website" {
   }
 }
 ```
+### Uplaod index.html
+It is not recomended to manage file using terraform. Derafrom is designe to manage your inferacture not for file management.
 
+I despite that I have used `aws_s3_object` to uplad the file for personal reasons. 
 
- 
+``` go
+resource "aws_s3_object" "s3_upload_index" {
+  bucket = var.web_bucket_name
+  key    = "index.html"
+  source = "temp/index.html"
+  content_type = "text/html"
+  etag = filemd5("temp/index.html")
+}
+```
+It worked but did not worked very well. 
+> If your inferacture is teardown or destroyed. Then running `tf apply` will create the bucket but through an error of not able to upload the object. this is because of latency to create and s3 bucket. So the files are not been uploaded on first apply. If you run the `tf apply` the file will be uploaded with out a hitch. 
+** Same goes for `tf destroy`**
+
+You can use `aws s3` commands ot upload and delete the obects after applying or before destroying the bucked using tf.
+
+``` bash
+# copy object to bucket
+aws s3 cp test.txt s3://mybucket/test2.txt
+
+# delete object to bucket
+aws s3 rm s3://mybucket/test2.txt
+```
