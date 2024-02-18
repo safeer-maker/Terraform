@@ -127,3 +127,15 @@ aws s3 cp test.txt s3://mybucket/test2.txt
 # delete object to bucket
 aws s3 rm s3://mybucket/test2.txt
 ```
+
+If you use below code where we are passing resource insted of variable, its work on the go
+
+``` go
+resource "aws_s3_object" "s3_upload_index" {
+  bucket = aws_s3_bucket.web_bucket.bucket
+  key    = "index.html"
+  source = "temp/index.html"
+  content_type = "text/html"
+  etag = filemd5("temp/index.html")
+}
+```

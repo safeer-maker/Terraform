@@ -29,7 +29,7 @@ resource "aws_s3_bucket_website_configuration" "s3_static_website" {
 }
 
 resource "aws_s3_object" "s3_upload_index" {
-  bucket = var.web_bucket_name
+  bucket = aws_s3_bucket.web_bucket.bucket
   key    = "index.html"
   source = "temp/index.html"
   content_type = "text/html"
