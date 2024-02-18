@@ -57,3 +57,49 @@ The structure of sub module is most like the root module it self. [link](https:/
 Root module can call multiple sub modules. The source of sub module can be local system or online storage. Check [Module Sources](https://developer.hashicorp.com/terraform/language/modules/sources#local-paths) to get more detials on that.
 
 [Created a sub module of S3 bucket.](/modules/web_bucket/)
+
+#### Output of sub Module
+
+Getting output from a sub module is bit of a tricky part. In sub module if you have defiend your bucket 
+``` go
+resource "aws_s3_bucket" "web_bucket" {
+  bucket = var.web_bucket_name
+
+  tags = {
+    Name        = var.team
+    Environment = var.environment
+  }
+}
+```
+The output of this submodule will be writen like
+```go
+output "bucket_name" {
+  value = aws_s3_bucket.web_bucket.bucket
+}
+```
+But at root module the output will modefied as
+``` go
+output "bucket_name" {
+  value = module.web_bucket.bucket_name
+}
+```
+### Static webesite Hosting
+
+S3 supports static website hosting. To host your web site you need to use [`aws_s3_bucket_website_configuration`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_website_configuration) resource to create it.
+
+``` go
+resource "aws_s3_bucket_website_configuration" "s3_static_website" {
+  bucket = var.web_bucket_name
+
+  index_document {
+    suffix = "index.html"
+  }
+
+  error_document {
+    key = "error.html"
+  }
+}
+```
+
+
+ 
