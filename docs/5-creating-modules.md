@@ -139,3 +139,11 @@ resource "aws_s3_object" "s3_upload_index" {
   etag = filemd5("temp/index.html")
 }
 ```
+
+
+
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution
+
+data sources (https://developer.hashicorp.com/terraform/language/data-sources)
+
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity
