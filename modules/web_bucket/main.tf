@@ -28,6 +28,14 @@ resource "aws_s3_bucket_website_configuration" "s3_static_website" {
   }
 }
 
+resource "aws_s3_object" "s3_upload_error" {
+  bucket = aws_s3_bucket.web_bucket.bucket
+  key    = "error.html"
+  source = "temp/error.html"
+  content_type = "text/html"
+  etag = filemd5("temp/error.html")
+}
+
 resource "aws_s3_object" "s3_upload_index" {
   bucket = aws_s3_bucket.web_bucket.bucket
   key    = "index.html"
@@ -53,7 +61,7 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
         #"Resource": "${aws_s3_bucket.web_bucket.arn}"
         "Condition"= {
             "StringEquals"= {
-                "AWS:SourceArn"= "arn:aws:cloudfront::${data.aws_caller_identity.current.account_id}:distribution/${aws_cloudfront_distribution.s3_distribution.id}}"
+                "AWS:SourceArn"= "arn:aws:cloudfront::${data.aws_caller_identity.current.account_id}:distribution/${aws_cloudfront_distribution.s3_distribution.id}"
             }
         }
     }
@@ -82,13 +90,13 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   comment             = "cdn for s3 ${var.web_bucket_name} bucket"
   default_root_object = "index.html"
 
-  logging_config {
-    include_cookies = false
-    bucket          = "mylogs.s3.amazonaws.com"
-    prefix          = "myprefix"
-  }
+  # logging_config {
+  #   include_cookies = false
+  #   bucket          = "mylogs.s3.amazonaws.com"
+  #   prefix          = "myprefix"
+  # }
 
-  aliases = ["mysite.example.com", "yoursite.example.com"]
+  #aliases = ["mysite.example.com", "yoursite.example.com"]
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
