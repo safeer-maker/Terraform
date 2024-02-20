@@ -210,4 +210,46 @@ locals {
 }
 ```
 
+#### Terraform data lifecycle
+
+Terraform support [lifecycle Meta-Argument] (https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle#ignore_changes)
+
+The purpose and need for data lifecycle is to only update the contnens on cloud when we want to. Before that enevy times we update or modefy the files `file5md` checks for content change and uplaod that file to cloud. But If in case of porduction server its sutable to push tested data.
+
+```go
+resource "aws_s3_object" "s3_upload_index" {
+  bucket        = aws_s3_bucket.web_bucket.bucket
+  key           = "index.html"
+  source        = "temp/index.html"
+  content_type  = "text/html"
+  etag            = filemd5("temp/index.html")
+
+  # lifecycle Meta-Argument
+  lifecycle {
+    replace_triggered_by = [terraform_data.content_version.output]
+    ignore_changes = [etag]
+  }
+}
+```
+##### Terraform data module
+
+[terraform_data](https://developer.hashicorp.com/terraform/language/resources/terraform-data) implements the standard resource lifecycle, but does not directly take any other actions. You can use the terraform_data resource without requiring or configuring a provider. It is always available through a built-in provider with the source address terraform.io/builtin/terraform
+
+```go
+variable "revision" {
+  default = 1
+}
+
+resource "terraform_data" "replacement" {
+  input = var.revision
+}
+
+# This resource has no convenient attribute which forces replacement,
+# but can now be replaced by any change to the revision variable value.
+resource "example_database" "test" {
+  lifecycle {
+    replace_triggered_by = [terraform_data.replacement]
+  }
+}
+```
 

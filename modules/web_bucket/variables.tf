@@ -12,3 +12,9 @@ variable "web_bucket_name" {
     type = string
     description = "Name of the bucket"
 }
+
+variable "content_version" {
+    type = number
+    description = "Version of the content"
+    default = 1
+}

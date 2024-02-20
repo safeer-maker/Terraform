@@ -34,6 +34,11 @@ resource "aws_s3_object" "s3_upload_error" {
   source = "temp/error.html"
   content_type = "text/html"
   etag = filemd5("temp/error.html")
+  
+  lifecycle {
+    replace_triggered_by = [terraform_data.content_version.output]
+    ignore_changes = [etag]
+  }
 }
 
 resource "aws_s3_object" "s3_upload_index" {
@@ -42,6 +47,15 @@ resource "aws_s3_object" "s3_upload_index" {
   source        = "temp/index.html"
   content_type  = "text/html"
   etag            = filemd5("temp/index.html")
+
+  lifecycle {
+    replace_triggered_by = [terraform_data.content_version.output]
+    ignore_changes = [etag]
+  }
+}
+
+resource "terraform_data" "content_version" {
+      input = var.content_version
 }
 
 data "aws_caller_identity" "current" {}
