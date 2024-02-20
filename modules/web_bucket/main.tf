@@ -37,11 +37,11 @@ resource "aws_s3_object" "s3_upload_error" {
 }
 
 resource "aws_s3_object" "s3_upload_index" {
-  bucket = aws_s3_bucket.web_bucket.bucket
-  key    = "index.html"
-  source = "temp/index.html"
-  content_type = "text/html"
-  etag = filemd5("temp/index.html")
+  bucket        = aws_s3_bucket.web_bucket.bucket
+  key           = "index.html"
+  source        = "temp/index.html"
+  content_type  = "text/html"
+  etag            = filemd5("temp/index.html")
 }
 
 data "aws_caller_identity" "current" {}
@@ -58,16 +58,13 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
         },
         "Action"= "s3:GetObject",
         "Resource"= "arn:aws:s3:::${aws_s3_bucket.web_bucket.id}/*",
-        #"Resource": "${aws_s3_bucket.web_bucket.arn}"
         "Condition"= {
             "StringEquals"= {
                 "AWS:SourceArn"= "arn:aws:cloudfront::${data.aws_caller_identity.current.account_id}:distribution/${aws_cloudfront_distribution.s3_distribution.id}"
             }
         }
     }
-      
   })
-
 }
 
 resource "aws_cloudfront_origin_access_control" "cloudfront_s3_oac" {
@@ -90,13 +87,6 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   comment             = "cdn for s3 ${var.web_bucket_name} bucket"
   default_root_object = "index.html"
 
-  # logging_config {
-  #   include_cookies = false
-  #   bucket          = "mylogs.s3.amazonaws.com"
-  #   prefix          = "myprefix"
-  # }
-
-  #aliases = ["mysite.example.com", "yoursite.example.com"]
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]

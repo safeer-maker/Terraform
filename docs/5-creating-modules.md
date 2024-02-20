@@ -147,3 +147,67 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/clou
 data sources (https://developer.hashicorp.com/terraform/language/data-sources)
 
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity
+
+
+Creating CDN is a mess
+
+### Creating CDN 
+
+Terraform supports cloudfornt as well as cloudflare.
+
+**Its worth mentioning [Coludfare](https://www.cloudflare.com). It is an extradonary CDN service provider with numerous edge location through out the glob.**
+
+#### Clicks OPS
+For the socpe of this porject we are using cloudfront. Its best to perform CLickOPS to get better idea how to host [S3 static website using CLoudFront](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/getting-started-cloudfront-overview.html).
+
+The major operations includes.
+ - Creating S3 bucket
+ - Upload index.html (Can be any html file)
+ - Enable static website hosting in S3 properties.
+ - NOT MAKE BUCKET PUBLIC
+ - Create a Cloudfront CDN form s3 bucket.
+ - Copy S3 bucket policy form CloudFront and past into s3 bucket policies
+ - Create ACL (CloudFront ==> Security ==> Origin access)
+
+#### CloudFront using Terraform 
+
+To create CDN using Tf [`aws_cloudfront_distribution`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution) is used. 
+
+Remember to remove all unnecessory arguments from the module as it will take minimum of five minutes to spin up or down the distribution. 
+
+The very next thing we needed is a OAC using [`aws_cloudfront_origin_access_control`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_origin_access_control). OAC provide the access of s3 to CloudFront.
+
+Last thing to do is to add [s3 bucket policy for cloudfront](https://docs.aws.amazon.com/whitepapers/latest/secure-content-delivery-amazon-cloudfront/s3-origin-with-cloudfront.html). While modefing ploicy try not to fetch arn directecly into policy as variable. In my case it does not work well.
+
+##### Data Sources
+
+Tf provides [Data Sources](https://developer.hashicorp.com/terraform/language/data-sources) to get data from aws cloud. In this particular project I have used `aws_caller_identity` to get aws user id.
+```go
+data "aws_caller_identity" "current" {}
+
+output "account_id" {
+  value = data.aws_caller_identity.current.account_id
+}
+
+output "caller_arn" {
+  value = data.aws_caller_identity.current.arn
+}
+
+output "caller_user" {
+  value = data.aws_caller_identity.current.user_id
+}
+```
+
+> Data sources can be used to fetch different type of data like arn and userid from providers. Is especialy helpfull to avoid hardcode the data and fetch it realtime.
+
+##### Local variables
+
+Local varaibles can be used as a file specific but global variables. So the you dont need to define the variables multiple times, while maintaing there scope at file specific.
+
+```go
+locals {
+  s3_origin_id = "MyS3Origin"
+}
+```
+
+
