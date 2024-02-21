@@ -140,3 +140,13 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 }
 
+
+resource "terraform_data" "cash_invalidation" {
+  lifecycle {
+    replace_triggered_by = [terraform_data.content_version.output]
+  }
+
+  provisioner "local-exec" {
+    command = "aws cloudfront create-invalidation --distribution-id ${aws_cloudfront_distribution.s3_distribution.id} --paths '/*'"
+  }
+}
