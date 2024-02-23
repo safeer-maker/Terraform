@@ -148,6 +148,17 @@ If you does not have `~/.bash_aliases` file then create one. If exist then add b
 alias tf="terraform"
 ```
 
+Created new Alias thats are great to work with
+
+```bash
+tfi  = terraform init
+tfp  = terraform plan
+tfa  = terraform apply
+tfap = terraform apply   -auto-approve
+tfd  = terraform destroy
+tfdp = terraform destroy -auto-approve
+```
+
 After modefing this file add below command in `~/.bashrc` file
 
 ```bash

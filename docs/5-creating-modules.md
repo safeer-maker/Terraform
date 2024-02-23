@@ -1,4 +1,18 @@
-# Table of Content
+# Table of Contents
+- [Restructuring the Workspace](#restructuring-the-worksapce)
+  * [Variable.tf and terraform.tfvars](#variabletf-and-terraformtfvars)
+  * [Submodule](#sub-module)
+    + [Output of Submodule](#output-of-sub-module)
+  * [Static Website Hosting](#static-webesite-hosting)
+  * [Upload index.html](#uplaod-indexhtml)
+  * [Creating CDN](#creating-cdn)
+    + [Clicks OPS](#clicks-ops)
+    + [CloudFront using Terraform](#cloudfront-using-terraform)
+      - [Data Sources](#data-sources)
+      - [Local Variables](#local-variables)
+    + [Terraform Data Lifecycle](#terraform-data-lifecycle)
+    + [CloudFront Cash Invalidation](#cloudfront-cash-invalidation)
+      - [Terraform Provisioners](#terraform-provisioners)
 
 # Restructuring the worksapce
 
@@ -253,3 +267,60 @@ resource "example_database" "test" {
 }
 ```
 
+#### CloudFront cash invalidation
+
+Cloudfront cashed data at its edge locations evenver a user request the data. Default cash invalidation time is 24 hours. But cash validation is required every times we upload, update or modefy the data. Eles the user will not be able to see the updated data.
+
+> Invalidation cash is not a easy task as there is no supportive module to invalidate cloudfornt cash.
+
+To perform invalidation we need to use aws cli command to invalidate it
+
+```bash
+aws cloudfront create-invalidation --distribution-id distribution_ID --paths "/*"
+```
+
+But terraform is uploading and managing objects for us. Its best to use `terraform_data` module to define trigger point for invalidation. Then use local provisioner to invalidate the cash
+
+```go
+resource "terraform_data" "cash_invalidation" {
+  lifecycle {
+    replace_triggered_by = [terraform_data.content_version.output]
+  }
+
+  provisioner "local-exec" {
+    command = "aws cloudfront create-invalidation --distribution-id ${aws_cloudfront_distribution.s3_distribution.id} --paths '/*'"
+  }
+}
+```
+
+##### Terraform Provisioners
+
+You can use [provisioners](https://developer.hashicorp.com/terraform/language/resources/provisioners/syntax) to model specific actions on the local machine or on a remote machine in order to prepare servers or other infrastructure objects for service.
+
+***Provisioners are a Last Resort***
+
+```go
+resource "aws_instance" "web" {
+  provisioner "local-exec" {
+    command = "echo first"
+  }
+}
+
+resource "aws_instance" "web" {
+  # Establishes connection to be used by all
+  # generic remote provisioners (i.e. file/remote-exec)
+  connection {
+    type     = "ssh"
+    user     = "root"
+    password = var.root_password
+    host     = self.public_ip
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "puppet apply",
+      "consul join ${aws_instance.web.private_ip}",
+    ]
+  }
+}
+```
