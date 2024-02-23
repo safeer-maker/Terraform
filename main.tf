@@ -9,7 +9,7 @@ terraform {
 
   required_providers {
       random = {
-      source = "hashicorp/random"
+       source = "hashicorp/random"
       version = "3.6.0"
       }
 
@@ -20,9 +20,9 @@ terraform {
   }
 }
 
-provider "random" {
-  # Configuration options
-}
+# provider "random" {
+#   # Configuration options
+# }
 
 provider "aws" {
   # Configuration options
@@ -34,11 +34,11 @@ resource "random_string" "bucket_name" {
   upper   = false
 }
 
-output "random_bucket_name" {
-  value = random_string.bucket_name.result
-}
+# output "random_bucket_name" {
+#   value = random_string.bucket_name.result
+# }
 
 resource "aws_s3_bucket" "example" {
-  bucket = random_string.bucket_name.result
+  bucket = "safeer-aws-cli-bucket-12345"
 }
 
