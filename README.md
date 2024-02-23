@@ -101,3 +101,12 @@
 ##### CloudFront Cash Invalidation
 
 - Use Terraform provisioners to perform CloudFront cache invalidation.
+
+
+## GitOPS
+
+Gitops is the method to implement/modefy your IAC when you either commit something.
+
+More throught approch is to use main branch for Version control apply. As anyone merge pull request to your project. Your infrastructure get updated for those changes as well.
+
+
