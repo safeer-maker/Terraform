@@ -39,6 +39,6 @@ resource "random_string" "bucket_name" {
 # }
 
 resource "aws_s3_bucket" "example" {
-  bucket = "safeer-aws-cli-bucket-123456"
+  bucket = "safeer-aws-cli-bucket-12345678"
 }
 
