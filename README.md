@@ -109,4 +109,3 @@ Gitops is the method to implement/modefy your IAC when you either commit somethi
 
 More throught approch is to use main branch for Version control apply. As anyone merge pull request to your project. Your infrastructure get updated for those changes as well.
 
-
